@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use Override;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 final class ElementFixtures extends Fixture
 {
-    #[Override]
+    #[\Override]
     public function load(ObjectManager $manager): void
     {
         // $product = new Product();
