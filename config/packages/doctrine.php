@@ -6,9 +6,9 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('doctrine', [
-        'server_version' => '16',
-        'profiling_collect_backtrace' => '%kernel.debug%',
-        'use_savepoints' => true,
+        // 'server_version' => '16',
+        // 'profiling_collect_backtrace' => '%kernel.debug%',
+        // 'use_savepoints' => true,
         'dbal' => [
             'url' => '%env(resolve:DATABASE_URL)%',
         ],
