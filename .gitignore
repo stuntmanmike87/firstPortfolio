@@ -1,14 +1,7 @@
-/public/build/fonts/glyphicons-*
-/public/build/images/glyphicons-*
-
-.php-version
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
 /.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -17,14 +10,6 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
-
-###> PHPMetrics HTML report ###
-/myreport/
-###< PHPMetrics HTML report ###
 
 ###> symfony/asset-mapper ###
 /public/assets/
@@ -35,3 +20,9 @@
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
+
+phpstan.neon
+
+sqldiff.exe
+sqlite3_analyzer.exe
+sqlite3.exe
