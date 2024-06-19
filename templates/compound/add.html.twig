@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add a compound{% endblock %}
+
+{% block body %}
+    <h1>Add a compound</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.formula) }}
+        {{ form_row(form.crystallineSpaceGroup) }}
+        <button type="submit">Add</button>
+    {{ form_end(form) }}
+{% endblock %}

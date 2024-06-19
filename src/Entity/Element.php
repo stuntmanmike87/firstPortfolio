@@ -2,54 +2,68 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace App\Entity;
 
 use App\Repository\ElementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /** @final */
+#[UniqueEntity(fields: ['atomicNumber', 'symbol', 'name'], message: 'We have already this element')]
 #[ORM\Entity(repositoryClass: ElementRepository::class)]
 class Element
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $ElementicNumber = null;
+    #[ORM\Column(type: Types::INTEGER, unique: true)]
+    #[Assert\NotBlank()]
+    private ?int $atomicNumber = null;
 
-    #[ORM\Column(length: 2)]
+    #[ORM\Column(type: Types::STRING, length: 2, unique: true)]
+    #[Assert\NotBlank()]
     private ?string $symbol = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 30, unique: true)]
+    #[Assert\NotBlank()]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?float $relativeElementicMass = null;
+    #[ORM\Column(type: Types::FLOAT)]
+    #[Assert\NotBlank()]
+    private ?float $relativeAtomicMass = null;
+
+    #[ORM\Column(type: Types::STRING, length: 4, unique: true)]
+    #[Assert\NotBlank()]
+    private ?string $crystallineSpaceGroup = null;
+
+    /** @var Collection<int, Compound> $compound */
+    #[ORM\ManyToMany(targetEntity: Compound::class, inversedBy: 'element')]
+    private Collection $compound;
+
+    public function __construct()
+    {
+        $this->compound = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getElementicNumber(): ?int
+    public function getAtomicNumber(): ?int
     {
-        return $this->ElementicNumber;
+        return $this->atomicNumber;
     }
 
-    public function setElementicNumber(int $ElementicNumber): static
+    public function setAtomicNumber(int $ElementicNumber): static
     {
-        $this->ElementicNumber = $ElementicNumber;
+        $this->atomicNumber = $ElementicNumber;
 
         return $this;
     }
@@ -78,14 +92,50 @@ class Element
         return $this;
     }
 
-    public function getRelativeElementicMass(): ?float
+    public function getRelativeAtomicMass(): ?float
     {
-        return $this->relativeElementicMass;
+        return $this->relativeAtomicMass;
     }
 
-    public function setRelativeElementicMass(float $relativeElementicMass): static
+    public function setRelativeAtomicMass(float $relativeAtomicMass): static
     {
-        $this->relativeElementicMass = $relativeElementicMass;
+        $this->relativeAtomicMass = $relativeAtomicMass;
+
+        return $this;
+    }
+
+    public function getCrystallineSpaceGroup(): ?string
+    {
+        return $this->crystallineSpaceGroup;
+    }
+
+    public function setCrystallineSpaceGroup(string $crystallineSpaceGroup): self
+    {
+        $this->crystallineSpaceGroup = $crystallineSpaceGroup;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Compound>
+     */
+    public function getCompoundEntity(): Collection
+    {
+        return $this->compound;
+    }
+
+    public function addCompound(Compound $compound): static
+    {
+        if (!$this->compound->contains($compound)) {
+            $this->compound->add($compound);
+        }
+
+        return $this;
+    }
+
+    public function removeCompound(Compound $compound): static
+    {
+        $this->compound->removeElement($compound);
 
         return $this;
     }

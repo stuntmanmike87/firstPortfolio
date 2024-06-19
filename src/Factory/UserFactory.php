@@ -11,13 +11,13 @@
 
 namespace App\Factory;
 
-use App\Entity\Element;
+use App\Entity\User;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Element>
+ * @extends PersistentProxyObjectFactory<User>
  */
-final class ElementFactory extends PersistentProxyObjectFactory
+final class UserFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -31,7 +31,7 @@ final class ElementFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Element::class;
+        return User::class;
     }
 
     /**
@@ -42,10 +42,14 @@ final class ElementFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'atomicNumber' => self::faker()->randomNumber(),
-            'name' => self::faker()->text(30),
-            'relativeAtomicMass' => self::faker()->randomFloat(),
-            'symbol' => self::faker()->text(2),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'email' => self::faker()->text(180),
+            'isDeleted' => self::faker()->boolean(),
+            'isExpired' => self::faker()->boolean(),
+            'isVerified' => self::faker()->boolean(),
+            'password' => self::faker()->text(),
+            'roles' => [],
+            'username' => self::faker()->text(),
         ];
     }
 
@@ -55,7 +59,7 @@ final class ElementFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Element $element): void {})
+            // ->afterInstantiate(function(User $user): void {})
         ;
     }
 }
