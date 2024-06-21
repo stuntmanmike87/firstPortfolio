@@ -230,11 +230,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeCompound(Compound $compound): static
     {
-        if ($this->compound->removeElement($compound)) {
-            // set the owning side to null (unless already changed)
-            if ($compound->getUser() === $this) {
+        // set the owning side to null (unless already changed)
+        if ($this->compound->removeElement($compound) && $compound->getUser() === $this) {
                 $compound->setUser(null);
-            }
         }
 
         return $this;
