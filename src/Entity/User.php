@@ -59,6 +59,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private \DateTimeImmutable $createdAt;
 
+    /** @var Collection<int, Element> $element */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Element::class, orphanRemoval: true)]
+    private Collection $element;
+
     /** @var Collection<int, Compound> $compound */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Compound::class, orphanRemoval: true)]
     private Collection $compound;
@@ -213,28 +217,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Compound>
      */
+    public function getElement(): Collection
+    {
+        return $this->element;
+    }
+
+    /**
+     * @return Collection<int, Compound>
+     */
     public function getCompound(): Collection
     {
         return $this->compound;
-    }
-
-    public function addCompound(Compound $compound): static
-    {
-        if (!$this->compound->contains($compound)) {
-            $this->compound->add($compound);
-            $compound->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompound(Compound $compound): static
-    {
-        // set the owning side to null (unless already changed)
-        if ($this->compound->removeElement($compound) && $compound->getUser() === $this) {
-                $compound->setUser(null);
-        }
-
-        return $this;
     }
 }

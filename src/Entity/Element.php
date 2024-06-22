@@ -61,23 +61,9 @@ class Element
         return $this->atomicNumber;
     }
 
-    public function setAtomicNumber(int $ElementicNumber): static
-    {
-        $this->atomicNumber = $ElementicNumber;
-
-        return $this;
-    }
-
     public function getSymbol(): ?string
     {
         return $this->symbol;
-    }
-
-    public function setSymbol(string $symbol): static
-    {
-        $this->symbol = $symbol;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -85,35 +71,14 @@ class Element
         return $this->name;
     }
 
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getRelativeAtomicMass(): ?float
     {
         return $this->relativeAtomicMass;
     }
 
-    public function setRelativeAtomicMass(float $relativeAtomicMass): static
-    {
-        $this->relativeAtomicMass = $relativeAtomicMass;
-
-        return $this;
-    }
-
     public function getCrystallineSpaceGroup(): ?string
     {
         return $this->crystallineSpaceGroup;
-    }
-
-    public function setCrystallineSpaceGroup(string $crystallineSpaceGroup): self
-    {
-        $this->crystallineSpaceGroup = $crystallineSpaceGroup;
-
-        return $this;
     }
 
     /**
