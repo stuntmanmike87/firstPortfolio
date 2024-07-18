@@ -1,16 +1,4 @@
 {
-    "dama/doctrine-test-bundle": {
-        "version": "8.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "7.2",
-            "ref": "896306d79d4ee143af9eadf9b09fd34a8c391b70"
-        },
-        "files": [
-            "config/packages/dama_doctrine_test_bundle.yaml"
-        ]
-    },
     "dflydev/dot-access-data": {
         "version": "v3.0.1"
     },
@@ -377,6 +365,18 @@
             "config/packages/monolog.yaml"
         ]
     },
+    "symfony/notifier": {
+        "version": "7.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.0",
+            "ref": "178877daf79d2dbd62129dd03612cb1a2cb407cc"
+        },
+        "files": [
+            "./config/packages/notifier.yaml"
+        ]
+    },
     "symfony/options-resolver": {
         "version": "v6.0.0"
     },
@@ -408,9 +408,6 @@
         "version": "v1.23.0"
     },
     "symfony/polyfill-intl-idn": {
-        "version": "v1.23.0"
-    },
-    "symfony/polyfill-intl-messageformatter": {
         "version": "v1.23.0"
     },
     "symfony/polyfill-intl-normalizer": {

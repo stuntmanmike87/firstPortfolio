@@ -35,7 +35,7 @@
         "symfony/intl": "^7.1",
         "symfony/mailer": "^7.1",
         "symfony/monolog-bundle": "^3.7",
-        "symfony/polyfill-intl-messageformatter": "^1.12",
+        "symfony/notifier": "7.1.*",
         "symfony/runtime": "^7.1",
         "symfony/security-bundle": "^7.1",
         "symfony/string": "^7.1",

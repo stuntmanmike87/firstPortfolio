@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Entity\Users;
-use App\Security\UsersAuthenticator;
+use App\Entity\User;
+use App\Security\UserAuthenticator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -15,7 +15,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'providers' => [
             'app_user_provider' => [
                 'entity' => [
-                    'class' => Users::class,
+                    'class' => User::class,
                     'property' => 'nickname',
                 ],
             ],
@@ -28,7 +28,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'main' => [
                 'lazy' => true,
                 'provider' => 'app_user_provider',
-                'custom_authenticator' => UsersAuthenticator::class,
+                'custom_authenticator' => UserAuthenticator::class,
                 'logout' => [
                     'path' => 'app_logout',
                 ],
